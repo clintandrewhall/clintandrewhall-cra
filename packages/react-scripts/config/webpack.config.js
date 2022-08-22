@@ -37,6 +37,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
+const Mode = require('frontmatter-markdown-loader/mode');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -384,6 +385,13 @@ module.exports = function (webpackEnv) {
                   maxSize: imageInlineSizeLimit,
                 },
               },
+            },
+            {
+              test: /\.md$/,
+              loader: 'frontmatter-markdown-loader',
+              options: {
+                mode: [Mode.REACT]
+              }
             },
             {
               test: /\.svg$/,
